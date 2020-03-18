@@ -1,6 +1,18 @@
 <template>
   <div id="flightright">
     <app-header />
+
+    <main>
+      <div class="container">
+
+        <transition name="slide" mode="out-in">
+
+          <router-view></router-view>
+
+        </transition>
+
+      </div>
+    </main>
   </div>
 </template>
 
@@ -26,11 +38,33 @@ export default {
   -moz-osx-font-smoothing: grayscale
   color: #2c3e50
 
-h2
-  font-weight: 100
-  padding-top: 5px
+  .container
+    height: calc(100vh - 86px)
+    width: 95vw
+    margin: 120px auto 0
+    overflow-x: hidden
+    overflow-y: scroll
+    max-width: 500px
+    max-height: 600px
+    box-shadow: 4px 4px 15px #eee
+    border-radius: 10px
 
-  strong
-    color: var(--green)
+    &::-webkit-scrollbar
+      width: 1px
+
+    /* Track */
+    &::-webkit-scrollbar-track
+      background: #f1f1f1
+      border-radius: 5px
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb
+      background: var(--green)
+      border-radius: 5px
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover
+      background: var(--green)
+
 
 </style>
