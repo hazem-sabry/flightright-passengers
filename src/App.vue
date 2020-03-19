@@ -37,6 +37,7 @@ export default {
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
   color: #2c3e50
+  padding-bottom: 40px
 
   .container
     height: calc(100vh - 86px)
@@ -48,6 +49,9 @@ export default {
     max-height: 600px
     box-shadow: 4px 4px 15px #eee
     border-radius: 10px
+
+    @media screen and (max-height: 568px)
+      margin: 100px auto 0
 
     &::-webkit-scrollbar
       width: 1px

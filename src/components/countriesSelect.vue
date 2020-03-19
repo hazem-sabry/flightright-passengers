@@ -1,8 +1,8 @@
 <template>
     <div class="vue-select" 
-        @click="toggleDropdown" 
+        @click.stop="toggleDropdown" 
         @keydown="keyPressed($event)" 
-        tabindex="2"><span class="selected-option">{{ placeholder }}
+        tabindex="4"><span class="selected-option">{{ placeholder }}
       <svg width="24" height="24" viewBox="0 0 24 24">
         <path d="M11,4H13V16L18.5,10.5L19.92,11.92L12,19.84L4.08,11.92L5.5,10.5L11,16V4Z"></path>
       </svg></span>
@@ -54,11 +54,15 @@ export default {
                 optionsContainer = this.$el.querySelector('.dropdown-options-container'),
                 currentOptionInDOM = this.$el.querySelector('.selected')
             
-            // Enter
+            // Enter || Space => toggleSelect
             if (e.keyCode == 13 || e.keyCode == 32) 
                 this.toggleDropdown()
 
-            // ArrowDown
+            // Esc => close Select
+            if (e.keyCode == 27 || e.keyCode == 32) 
+                this.showDropdown = false
+
+            // ArrowDown => Next option
             if (e.keyCode == 40) {
 
                 // Select the option
@@ -82,7 +86,8 @@ export default {
                 if (currentOptionInDOM != null)
                     optionsContainer.scrollTop = currentOptionInDOM.offsetTop
             }
-            // ArrowUp
+
+            // ArrowUp => Prev option
             if (e.keyCode == 38) {
 
                 // Select the option
@@ -133,26 +138,30 @@ $light-gray: #f8f8f8;
 }
 
 .vue-select {
-    width: 300px;
+    width: 100%;
     background-color: #fff;
-    margin: 45px auto;
+    margin: 15px auto 0;
     cursor: pointer;
+    border-radius: 6px;
     user-select: none;
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.06);
-    border: 1px solid transparent;
+    box-shadow: 3px 3px 4px 0 rgba(0, 0, 0, 0.09);
+    border: 1.5px solid #eee;
     position: relative;
     transition: all 200ms linear;
 
     &:focus {
-        border: 1px solid var(--green)
+        border: 1.5px solid var(--green);
+        border-radius: 6px 6px 0 0;
     }
   
   .selected-option {
         @include ellipsis();
         display: inline-block;
-        padding: 15px 50px 15px 15px;
+        text-align: left;
+        padding: 15px 15px 10px 10px;
         width: 100%;
         position: relative;
+        color: rgba(0,0,0,.45);
         transition: all 200ms linear;
         
         &:hover {
@@ -172,12 +181,15 @@ $light-gray: #f8f8f8;
 
 .dropdown-options-container {
     position: absolute;
-    top: 50px;
-    left: 0;
-    width: 100%;
+    top: 45px;
+    left: -1.5px;
+    width: calc(100% + 3px);
     z-index: 9;
     background-color: #fff;
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.06);
+    border: 1.5px solid var(--green);
+    border-top-color: transparent;
+    border-radius: 0 0 6px 6px;
+    box-shadow: 3px 3px 4px 0 rgba(0, 0, 0, 0.09);
     overflow-y: scroll;
     height: 200px;
 
