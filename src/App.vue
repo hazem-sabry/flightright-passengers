@@ -5,10 +5,8 @@
     <main>
       <div class="container">
 
-        <transition name="slide" mode="out-in">
-
+        <transition name="fade" mode="out-in">
           <router-view></router-view>
-
         </transition>
 
       </div>
@@ -22,6 +20,11 @@ import appHeader from './components/appHeader'
 
 export default {
   name: 'flightright',
+  data() {
+    return {
+      currentRoute: this.$router.currentRoute
+    }
+  },
   components: {
     appHeader
   }
@@ -71,4 +74,18 @@ export default {
       background: var(--green)
 
 
+.fade-enter-active
+  transition: all .2s linear
+
+.fade-leave-active
+  transition: all .2s linear
+
+.fade-enter 
+  transform: translateX(20px)
+  opacity: 0
+
+.fade-leave-to
+  transform: translateX(-20px)
+  opacity: 0
+  
 </style>

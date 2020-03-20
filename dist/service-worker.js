@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.ae626491a3c498d9cfc82cb37af1e913.js"
+  "/precache-manifest.e213ce3fbb1b6981e5d17cd15bc5b787.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "flightright-passengers"});
