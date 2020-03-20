@@ -10,16 +10,15 @@ export default new Vuex.Store({
       fullName: null,
       age: null,
       email: null,
-      country: null,
+      country: {},
       street: null,
       zip: null,
       phone: null
     },
-    secondaryPassengers: [{
-      fulName: null,
-      age: null
-    }],
-    countries: []
+    secondaryPassengers: [],
+    countries: [],
+    // To know if the primary passenger data was entered successfully
+    primaryPassengerStatus: false
 
   },
   getters: {
@@ -27,11 +26,14 @@ export default new Vuex.Store({
     getPrimaryPassenger: state => {
       return state.primaryPassenger;
     },
+    getPrimaryPassengerStatus: state => {
+      return state.primaryPassengerStatus;
+    },
     getSecondaryPassengers: state => {
       return state.secondaryPassengers;
     },
     getCountries: state => {
-      return state.countries
+      return state.countries;
     }
 
   },
@@ -40,15 +42,18 @@ export default new Vuex.Store({
     setPrimaryPassenger: (state, data) => {
       state.primaryPassenger = data
     },
+    setPrimaryPassengerStatus: state => {
+      state.primaryPassengerStatus = true;
+    },
     setSecondaryPassengers: (state, data) => {
-      state.secondaryPassengers.push(data)
+      state.secondaryPassengers.push(data);
     },
     deleteSecondaryPassenger: (state, index) => {
       if (index > -1)
-        state.secondaryPassengers.splice(index, 1)
+        state.secondaryPassengers.splice(index, 1);
     },
     setCountries: (state, data) => {
-      state.countries = data
+      state.countries = data;
     }
 
   },
@@ -58,21 +63,21 @@ export default new Vuex.Store({
         mode = 'cors',
         method = 'GET',
         headers = new Headers(),
-        options = null
+        options = null;
 
-        headers.append('Accept', 'application/json')
+        headers.append('Accept', 'application/json');
 
         options = {
           mode,
           method,
           headers
-        }
+        };
         
       fetch(url, options)
         .then(response => response.json())
         .then(countries => {
           commit('setCountries', countries)
-        })
+        });
     }
   }
 })

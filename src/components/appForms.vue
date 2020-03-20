@@ -1,5 +1,5 @@
 <template>
-    <form @submit.stop autocomplete="off">
+    <form autocomplete="off">
         <slot />
     </form>
 </template>
@@ -93,8 +93,7 @@ form
                 color: var(--green)
                 font-size: .8em
 
-        &.error
-            input
+            &.error
                 border-color: #e84118
 
                 &:active + span, &:focus + span, &:not(:placeholder-shown) + span

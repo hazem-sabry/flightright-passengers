@@ -43,7 +43,9 @@ export default {
 
             this.selected = option.name;
             this.placeholder = option.name;
-            this.optionSelected = option
+            this.optionSelected = option;
+            this.$el.classList.remove('error')
+
             // inform parent (the form) of a selection so the model can be updated.
             this.$emit('interface', option)
 
@@ -152,6 +154,10 @@ $light-gray: #f8f8f8;
     &:focus {
         border: 1.5px solid var(--green);
         border-radius: 6px 6px 0 0;
+    }
+
+    &.error {
+        border-color: #e84118
     }
   
   .selected-option {
