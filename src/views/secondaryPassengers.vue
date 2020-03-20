@@ -54,13 +54,13 @@
 import appForms from '../components/appForms'
 
 export default {
-    data() {
-        return {
-            passengers: []
-        }
-    },
     components: {
         appForms
+    },
+    computed: {
+        passengers: function() {
+            return this.$store.getters.getSecondaryPassengers;
+        }
     },
     filters: {
         limitString: function (value) {
@@ -120,9 +120,11 @@ export default {
             if (inputsNotEmpty.status) {
                 everythingIsGoingWell = true;
             } else {
+
                 inputsNotEmpty.failedElements.forEach( element => {
                     element.classList.add('error');
                 })
+                
                 everythingIsGoingWell = false
             }
 
@@ -136,8 +138,6 @@ export default {
 
                 store.commit('setSecondaryPassengers', data)
 
-                this.passengers = store.getters.getSecondaryPassengers
-
             }
         },
         deletePassenger: function(index) {
@@ -146,7 +146,6 @@ export default {
 
             store.commit('deleteSecondaryPassenger', index);
 
-            this.passengers = store.getters.getSecondaryPassengers;
         }
     }
 }

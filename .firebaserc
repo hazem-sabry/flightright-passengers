@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "flightright-passengers",
+    "passengers": "flightright-passengers"
+  }
+}
